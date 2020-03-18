@@ -1,0 +1,42 @@
+dm 'log;clear;output;clear';
+options nodate nocenter ls=78 ps=55;
+OPTIONS FORMCHAR="|----|+|---+=|-/\<>*";
+ODS listing; ods graphics off;
+title1 'Lab1, Problem 2, Your name, Lab section ';
+title2 "EXST 7005 Assignment 1";
+data people;
+input gender $ height weight;
+datalines;
+m 63 125
+m 76 195
+f 62 109
+m 75 186
+f 67 115
+f 60 120
+m 75 205
+m 71 185
+m 63 140
+f 59 135
+f 65 125
+m 68 167
+m 72 220
+f 66 155
+;
+proc sort data=people;
+by gender;
+run;
+proc print data=people;
+title3 "Raw data sorted only by gender";
+run;
+proc sort data=people;
+by gender height weight;
+run;
+proc print data=people;
+title3 "Raw data sorted by gender, height and weight ";
+run;
+proc univariate data=people plot; by gender;
+title3 "Univariate procedure output done separately by gender ";
+title4 "The analysis was done for two quantitative variables";
+var height weight;
+run;
+quit;
